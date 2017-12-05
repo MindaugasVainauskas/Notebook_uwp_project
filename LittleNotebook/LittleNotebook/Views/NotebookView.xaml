@@ -15,14 +15,21 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Orientation="Vertical">
-            <ListView x:Name="lsvNotes" ItemsSource="{x:Bind Notebook.Notes, Mode=OneWay}"
+            <ListView x:Name="lsvTitles" ItemsSource="{x:Bind Notebook.Notes, Mode=OneWay}"
                       SelectedIndex="{x:Bind Notebook.SelectedIndex, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:NoteViewModel">
-                        <TextBlock Text="{x:Bind Title, Mode=OneWay}"></TextBlock>
+                        <TextBlock Text="{x:Bind Title, Mode=OneWay}" 
+                                   Margin="10 20 10 10"></TextBlock>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBox Margin="20 20 20 0" Text="{x:Bind Notebook.NoteInFocus.Title, Mode=TwoWay}"/>
+            <TextBlock Margin="25 0 25 0" Text="{x:Bind Notebook.NoteInFocus.Date, Mode=OneWay}"/>
+            <TextBox Height="200" Width="230" Margin="20"
+                       Text="{x:Bind Notebook.NoteInFocus.NoteBody, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </Page>
