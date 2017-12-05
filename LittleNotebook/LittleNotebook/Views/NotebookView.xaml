@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="LittleNotebook.Views.NotebookView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LittleNotebook.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:viewModels="using:LittleNotebook.ViewModels">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <ListView x:Name="lsvNotes" ItemsSource="{x:Bind Notebook.Notes, Mode=OneWay}"
+                      SelectedIndex="{x:Bind Notebook.SelectedIndex, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:NoteViewModel">
+                        <TextBlock Text="{x:Bind Title, Mode=OneWay}"></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
