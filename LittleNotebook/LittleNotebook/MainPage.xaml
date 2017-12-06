@@ -9,6 +9,10 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="30">
+            <TextBox Header="Enter your E-mail address"
+                PlaceholderText="email@email.com" Margin="5"/>
+            <TextBox Header="Enter your password"
+                PlaceholderText="Password" InputScope="Password" Margin="5"/>
             <Button Content="Click Here to go to next page"
                     Margin="40" Click="Button_Click"></Button>
         </StackPanel>

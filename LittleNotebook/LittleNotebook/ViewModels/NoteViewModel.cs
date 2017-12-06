@@ -11,12 +11,6 @@ namespace LittleNotebook.ViewModels
     {
         public NoteViewModel(Note note = null): base(note) { }
 
-        public string Date
-        {
-            get { return This.noteDate; }
-            set { SetProperty(This.noteDate, value, () => This.noteDate = value); }
-        }
-
         public string Title
         {
             get { return This.title; }

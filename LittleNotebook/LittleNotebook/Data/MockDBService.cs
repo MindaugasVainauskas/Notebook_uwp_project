@@ -9,7 +9,6 @@ namespace LittleNotebook.Data
 {
     public class Note
     {
-        public string noteDate { get; set; }
         public string title { get; set; }
         public string noteBody { get; set; }
     }
@@ -20,11 +19,11 @@ namespace LittleNotebook.Data
             Debug.WriteLine("GET the list of notes");
             return new List<Note>()
             {
-                new Note() { noteDate = DateTime.Now.ToLocalTime().ToString(), title="Note 1", noteBody="This is note one"},
-                new Note() { noteDate = DateTime.Now.ToLocalTime().ToString(), title="Note 2", noteBody="This is note two"},
-                new Note() { noteDate = DateTime.Now.ToLocalTime().ToString(), title="Note 3", noteBody="This is note three"},
-                new Note() { noteDate = DateTime.Now.ToLocalTime().ToString(), title="Note 4", noteBody="This is note four"},
-                new Note() { noteDate = DateTime.Now.ToLocalTime().ToString(), title="Note 5", noteBody="This is note five"}
+                new Note() { title="Note 1", noteBody="This is note one"},
+                new Note() { title="Note 2", noteBody="This is note two"},
+                new Note() { title="Note 3", noteBody="This is note three"},
+                new Note() { title="Note 4", noteBody="This is note four"},
+                new Note() { title="Note 5", noteBody="This is note five"}
             };
         }
 
