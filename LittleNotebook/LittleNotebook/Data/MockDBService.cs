@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LittleNotebook.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace LittleNotebook.Data
 {
-    public class Note
-    {
-        public string title { get; set; }
-        public string noteBody { get; set; }
-    }
+    
     class MockDBService
     {
         public static List<Note> GetNotes()
