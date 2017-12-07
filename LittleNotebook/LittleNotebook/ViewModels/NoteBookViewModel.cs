@@ -69,7 +69,12 @@ namespace LittleNotebook.ViewModels
             }
         }
 
-        void Note_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
+        public void New()
+        {
+            var newNote = new NoteViewModel();
+        }
+
+        void Note_OnNotifyPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             notebook.UpdateNote((NoteViewModel)sender);
         }

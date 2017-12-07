@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LittleNotebook.Data
 {
-    
+    //Fake DB service to produce some mock data to work with
     class MockDBService
     {
         public static List<Note> GetNotes()

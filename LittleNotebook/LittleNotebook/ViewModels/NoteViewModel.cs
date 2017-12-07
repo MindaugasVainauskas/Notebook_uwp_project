@@ -1,4 +1,5 @@
 ﻿using LittleNotebook.Data;
+using LittleNotebook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
