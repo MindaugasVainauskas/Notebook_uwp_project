@@ -8,13 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Margin="30">
+        <StackPanel Margin="60">
             <TextBox Header="Enter your E-mail address"
-                PlaceholderText="email@email.com" Margin="5"/>
+                PlaceholderText="email@email.com" Margin="50 10 50 10"/>
             <TextBox Header="Enter your password"
-                PlaceholderText="Password" InputScope="Password" Margin="5"/>
-            <Button Content="Click Here to go to next page"
-                    Margin="40" Click="Button_Click"></Button>
+                PlaceholderText="Password" InputScope="Password" Margin="50 10 50 10"/>
+            <Button Content="Click Here to go to next page" HorizontalAlignment="Center"
+                    Margin="20" Click="Button_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>

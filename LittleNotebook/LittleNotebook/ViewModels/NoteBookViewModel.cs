@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace LittleNotebook.ViewModels
     public class NoteBookViewModel : NotificationHelper
     {
         Notebook notebook;
-
+        NoteViewModel tempNote;
         public NoteBookViewModel()
         {
             notebook = new Notebook();
@@ -47,18 +48,56 @@ namespace LittleNotebook.ViewModels
 
         public NoteViewModel NoteInFocus
         {
-            get { return (_SelectedIndex >= 0) ? _Notes[_SelectedIndex] : null; }
+            //if note is within notes list, return that note.
+            //get { return (SelectedIndex >= 0) ? _Notes[SelectedIndex] : NewNote(); }
+            get
+            {
+                if (SelectedIndex < 0)
+                {
+                    return NewNote();
+                }
+                else
+                {
+                    return _Notes[SelectedIndex];
+                }
+            }
+            set
+            {
+                NoteInFocus = value;
+                NoteInFocus.Title = value.Title;
+                NoteInFocus.NoteBody = value.NoteBody;
+            }
         }
 
-        public void Add()
+        public NoteViewModel NewNote()
         {
-            var note = new NoteViewModel();
-            note.PropertyChanged += Note_OnNotifyPropertyChanged;
-            Notes.Add(note);
-            notebook.AddNote(note);
-            SelectedIndex = Notes.IndexOf(note);
+            tempNote = new NoteViewModel();
+            Debug.WriteLine("Debug->"+tempNote.Title+" "+tempNote.NoteBody);
+            return tempNote;
         }
 
+
+        public void SaveNote()
+        {
+            var note = NewNote();
+            if (SelectedIndex < 0)
+            {
+                //adding new note into list doesnt work.
+                Notes.Add(note);
+                notebook.AddNote(note);
+                SelectedIndex = Notes.IndexOf(note);
+            }
+            else
+            {
+                //updating current note works.
+                note.Title = NoteInFocus.Title;
+                note.NoteBody = NoteInFocus.NoteBody;
+                notebook.UpdateNote(note);
+                Debug.WriteLine("Current note has been saved!");
+            }           
+        }
+
+        //Delete note from list. Works.
         public void Delete()
         {
             if (SelectedIndex != -1)
@@ -66,12 +105,14 @@ namespace LittleNotebook.ViewModels
                 var note = Notes[SelectedIndex];
                 Notes.RemoveAt(SelectedIndex);
                 notebook.DeleteNote(note);
+                SelectedIndex = -1;
             }
         }
 
+        //Set notebook up for new note. seems to work now
         public void New()
         {
-            var newNote = new NoteViewModel();
+            SelectedIndex = -1;
         }
 
         void Note_OnNotifyPropertyChanged(object sender, PropertyChangedEventArgs e)
