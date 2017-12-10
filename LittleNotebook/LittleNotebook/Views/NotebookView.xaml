@@ -26,11 +26,11 @@
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <TextBox Margin="20 20 20 0" Header="Title" x:Uid="nTitle"
-                     Text="{x:Bind Path=Notebook.NoteInFocus.Title, Mode=TwoWay}"/>
+            <TextBox Margin="20 20 20 0" Header="Title" x:Name="nTitle"
+                     Text="{x:Bind Path=Notebook.SelectedNote.Title, Mode=TwoWay}"/>
             <TextBox x:Name="nBody" MaxHeight="300" Height="300" MaxWidth="500" Margin="20" Header="Write your note text here"
                      TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                       Text="{x:Bind Path=Notebook.NoteInFocus.NoteBody, Mode=TwoWay}"/>
+                       Text="{x:Bind Path=Notebook.SelectedNote.NoteBody, Mode=TwoWay}" />
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="20">
                 <Button Content="Delete" Margin="5" Width="100" Click="{x:Bind Path=Notebook.Delete}"/>
                 <Button Content="Save" Margin="5" Width="100" Click="{x:Bind Path=Notebook.SaveNote}"/>

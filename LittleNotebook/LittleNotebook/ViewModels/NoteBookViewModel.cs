@@ -13,7 +13,7 @@ namespace LittleNotebook.ViewModels
     public class NoteBookViewModel : NotificationHelper
     {
         Notebook notebook;
-        NoteViewModel tempNote;
+        NoteViewModel newNote;
         public NoteBookViewModel()
         {
             notebook = new Notebook();
@@ -42,44 +42,48 @@ namespace LittleNotebook.ViewModels
             set
             {
                 if (SetProperty(ref _SelectedIndex, value))
-                { RaisePropertyChanged(nameof(NoteInFocus)); }
+                { RaisePropertyChanged(nameof(SelectedNote)); }
             }
         }
 
-        public NoteViewModel NoteInFocus
+        NoteViewModel tempNote;
+        
+        public NoteViewModel SelectedNote
         {
             //if note is within notes list, return that note.
-            //get { return (SelectedIndex >= 0) ? _Notes[SelectedIndex] : NewNote(); }
             get
             {
-                if (SelectedIndex < 0)
+                if (SelectedIndex == -1)
                 {
-                    return NewNote();
+                    if (tempNote == null)
+                    {
+                        tempNote = NewNote();
+                    }
+                    return tempNote;
                 }
                 else
                 {
                     return _Notes[SelectedIndex];
                 }
             }
-            set
-            {
-                NoteInFocus = value;
-                NoteInFocus.Title = value.Title;
-                NoteInFocus.NoteBody = value.NoteBody;
-            }
         }
 
         public NoteViewModel NewNote()
         {
-            tempNote = new NoteViewModel();
-            Debug.WriteLine("Debug->"+tempNote.Title+" "+tempNote.NoteBody);
-            return tempNote;
+            newNote = new NoteViewModel();
+            Debug.WriteLine("Debug->"+newNote.Title+" "+newNote.NoteBody);
+            return newNote;
         }
 
 
         public void SaveNote()
         {
             var note = NewNote();
+            if (tempNote != null)
+            {
+                note = tempNote;
+                tempNote = null;
+            }
             if (SelectedIndex < 0)
             {
                 //adding new note into list doesnt work.
@@ -90,8 +94,8 @@ namespace LittleNotebook.ViewModels
             else
             {
                 //updating current note works.
-                note.Title = NoteInFocus.Title;
-                note.NoteBody = NoteInFocus.NoteBody;
+                note.Title = SelectedNote.Title;
+                note.NoteBody = SelectedNote.NoteBody;
                 notebook.UpdateNote(note);
                 Debug.WriteLine("Current note has been saved!");
             }           
@@ -112,6 +116,7 @@ namespace LittleNotebook.ViewModels
         //Set notebook up for new note. seems to work now
         public void New()
         {
+            tempNote = null;
             SelectedIndex = -1;
         }
 
