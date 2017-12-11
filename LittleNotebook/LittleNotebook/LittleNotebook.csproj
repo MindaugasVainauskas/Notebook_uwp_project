@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authentication\AuthenticationService.cs" />
+    <Compile Include="Data\AzureDBService.cs" />
     <Compile Include="Data\MockDBService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

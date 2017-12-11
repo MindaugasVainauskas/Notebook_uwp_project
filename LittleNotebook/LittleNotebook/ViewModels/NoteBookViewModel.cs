@@ -19,12 +19,16 @@ namespace LittleNotebook.ViewModels
             notebook = new Notebook();
             _SelectedIndex = -1;
 
-            foreach (var note in notebook.lstNotes)
+            if (notebook.lstNotes != null)
             {
-                var n = new NoteViewModel(note);
-                n.PropertyChanged += Note_OnNotifyPropertyChanged;
-                _Notes.Add(n);
+                foreach (var note in notebook.lstNotes)
+                {
+                    var n = new NoteViewModel(note);
+                    n.PropertyChanged += Note_OnNotifyPropertyChanged;
+                    _Notes.Add(n);
+                }
             }
+           
         }
 
         ObservableCollection<NoteViewModel> _Notes = new ObservableCollection<NoteViewModel>();

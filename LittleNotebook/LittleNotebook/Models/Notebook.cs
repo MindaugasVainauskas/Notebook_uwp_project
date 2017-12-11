@@ -11,20 +11,24 @@ namespace LittleNotebook.Models
     {
         public List<Note> lstNotes { get; set; }
 
-        public Notebook()
+        public async void GetNotes()
         {
-            //Should open connection to DB here(Once I have a working DB -.-')
-
-            //Get the current list of notes from DB
-            lstNotes = MockDBService.GetNotes();
+            lstNotes = await AzureDBService.GetList();
         }
 
+        public Notebook()
+        {
+            //Get the current list of notes from DB
+            GetNotes();
+        }
+
+        //This method now saves the notes properly in SQL DB hosted in Azure.
         public void AddNote(Note note)
         {
             if (!lstNotes.Contains(note))
             {
                 lstNotes.Add(note);
-                MockDBService.Write(note);
+                AzureDBService.Write(note);
             }
         }
 
@@ -33,13 +37,13 @@ namespace LittleNotebook.Models
             if (lstNotes.Contains(note))
             {
                 lstNotes.Remove(note);
-                MockDBService.Delete(note);
+                AzureDBService.Delete(note);
             }
         }
 
         public void UpdateNote(Note note)
         {
-            MockDBService.Write(note);
+            AzureDBService.Write(note);
         }
     }
 }
