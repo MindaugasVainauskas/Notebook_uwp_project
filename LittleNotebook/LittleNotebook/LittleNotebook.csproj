@@ -95,13 +95,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\AuthenticationService.cs" />
     <Compile Include="Data\MockDBService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Notebook.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Authentication\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\NoteBookViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
