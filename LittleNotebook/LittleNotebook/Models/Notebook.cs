@@ -11,15 +11,15 @@ namespace LittleNotebook.Models
     {
         public List<Note> lstNotes { get; set; }
 
-        public async void GetNotes()
+        public async Task<List<Note>> GetNotes()
         {
             lstNotes = await AzureDBService.GetList();
+
+            return lstNotes;
         }
 
         public Notebook()
         {
-            //Get the current list of notes from DB
-            GetNotes();
         }
 
         //This method now saves the notes properly in SQL DB hosted in Azure.
@@ -43,7 +43,7 @@ namespace LittleNotebook.Models
 
         public void UpdateNote(Note note)
         {
-            AzureDBService.Write(note);
+            AzureDBService.Update(note);
         }
     }
 }

@@ -14,11 +14,11 @@ namespace LittleNotebook.Data
     {
         static IMobileServiceTable<Note> NoteTableObj = App.MobileService.GetTable<Note>();
 
+        //get list async call works.
         public static async Task<List<Note>> GetList()
         {
             List<Note> list = new List<Note>();
             list = await NoteTableObj.ToListAsync();
-            Debug.WriteLine("List size is => "+list.Count);
             return list;
         }
 
@@ -28,13 +28,12 @@ namespace LittleNotebook.Data
         public static async void Write(Note note)
         {
             try
-            {
-                
-                Note obj = new Note();
+            {                
+                Note obj = new Note();                
                 obj.title = note.title;
                 obj.noteBody = note.noteBody;
                 await NoteTableObj.InsertAsync(obj);
-                MessageDialog msgDialog = new MessageDialog("Note with title "+note.title+" has been saved successfully.");
+                MessageDialog msgDialog = new MessageDialog(note.title+" has been saved successfully.");
                 await msgDialog.ShowAsync();
             }
             catch (Exception ex)
@@ -44,11 +43,25 @@ namespace LittleNotebook.Data
             }
         }
 
-        //This method should delete note from SQL DB on Azure
+        //This method saves data in the SQL DB hosted on Azure cloud.
+        public static async void Update(Note note)
+        {
+            try
+            {
+                await NoteTableObj.UpdateAsync(note); //Call updateAsync to update record instead of creating new one.
+                MessageDialog msgDialog = new MessageDialog(note.title + " has been updated successfully.");
+                await msgDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        //This method deletes note from SQL DB on Azure
         public static async void Delete(Note note)
         {
             await NoteTableObj.DeleteAsync(note);
-            Debug.WriteLine("DELETE note with title " + note.title);
         }
     }
 }

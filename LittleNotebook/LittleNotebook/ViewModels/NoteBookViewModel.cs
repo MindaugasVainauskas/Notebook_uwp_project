@@ -14,23 +14,27 @@ namespace LittleNotebook.ViewModels
     {
         Notebook notebook;
         NoteViewModel newNote;
+
         public NoteBookViewModel()
+        {
+            CreateList();           
+        }
+
+        //Creates the list.
+        protected async void CreateList()
         {
             notebook = new Notebook();
             _SelectedIndex = -1;
-
-            if (notebook.lstNotes != null)
+            //Need to await for the list to return and then populate the listview from it.
+            var list = await notebook.GetNotes();
+            foreach (var note in list)
             {
-                foreach (var note in notebook.lstNotes)
-                {
-                    var n = new NoteViewModel(note);
-                    n.PropertyChanged += Note_OnNotifyPropertyChanged;
-                    _Notes.Add(n);
-                }
+                var n = new NoteViewModel(note);
+                n.PropertyChanged += Note_OnNotifyPropertyChanged;
+                _Notes.Add(n);
             }
-           
         }
-
+        
         ObservableCollection<NoteViewModel> _Notes = new ObservableCollection<NoteViewModel>();
 
         public ObservableCollection<NoteViewModel> Notes
@@ -94,6 +98,8 @@ namespace LittleNotebook.ViewModels
                 Notes.Add(note);
                 notebook.AddNote(note);
                 SelectedIndex = Notes.IndexOf(note);
+                CreateList();
+                
             }
             else
             {

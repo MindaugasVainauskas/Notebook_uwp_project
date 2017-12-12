@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LittleNotebook.ViewModels
 {
     //This helper class helps with propery chage notifications by saving code.
-    //Adapted from MVVM lab code as it is a very efficient class for what I want it to do.
+    //Adapted from MVVM lab code as it is already doing exactly what I want it to do.
     public class NotificationHelper : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
